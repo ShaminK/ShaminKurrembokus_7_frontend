@@ -64,3 +64,66 @@ h1 {
   padding-bottom: 0;
   
 }
+
+li {
+  list-style-type: none;
+}
+
+/* style de la page des posts */
+
+.postContainer {
+  display: flex;
+  background-color: #61dafb;
+  flex-direction: column;
+}
+
+.listPost {
+  border: 1px red solid;
+  padding-left: 0;
+  max-width: 1000px;
+}
+
+.listPostItem {
+  border: 1px green solid;
+  border-radius: 10px;
+  text-align: center;
+  margin: 30px;
+  background-color: burlywood;
+}
+
+.postImage {
+  width: 90%;
+}
+
+/*    Page des commentaire */
+.commentContainer {
+  padding: 0;
+}
+.listComment {
+  border-radius: 10px;
+  padding: 20px 10px;
+  background-color: rgb(204, 203, 203);
+}
+
+.listCommentItem {
+  border: black solid 2px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 10px 0;
+  width: 100%;
+  background-color: honeydew;
+}
+
+.commentContent {
+  border-radius: 7px;
+  padding: 20px;
+  /* border: solid blue 1px; */
+  width: 100%;
+}
+
+.commentInfo {
+  text-align: center;
+  border-top: black solid 1px;
+  margin-bottom: 2px;
+}

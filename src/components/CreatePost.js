@@ -1,5 +1,4 @@
 import React from 'react';
-import Api from '../api';
 
 import axios from 'axios';
 
@@ -10,7 +9,7 @@ class CreatePost extends React.Component {
         this.state = {
             title: 'title du post',
             description: 'la description du post',
-            urlPost: null,
+            file: null,
             token: localStorage.getItem('token'),
             userId: localStorage.getItem('userId')
         }
@@ -18,7 +17,7 @@ class CreatePost extends React.Component {
 
     fileOnChange = (e) => {
         let file = e.target.files[0]
-        this.setState({ urlPost: file })
+        this.setState({ file: file })
     }
 
 
@@ -39,9 +38,10 @@ class CreatePost extends React.Component {
 
         let title = this.state.title;
         let description = this.state.description;
-        let file = this.state.urlPost;
+        let file = this.state.file;
         let token = this.state.token;
         let userId = this.state.userId;
+        console.log('(CreatePost/sendForm) contenu des variables contenant le state :' + title + ' - ' + description + ' - ' + file + ' - ' + token + ' - ' + userId);
 
         let formData = new FormData()
 
@@ -50,15 +50,22 @@ class CreatePost extends React.Component {
         formData.append('image', file)
         formData.append('userId', userId);
 
-        console.log('je suis ici');
-        axios( {method:'post', url: 'http://localhost:4200/api/posts/edit/',data: {'formData': formData,'userId': userId} , 
+        console.log('(CreatePost/sendForm)');
+        for (var value of formData.values()) {
+            console.log(value);
+        }
+
+        
+        axios.post("http://localhost:4200/api/posts/edit/", formData, {
             headers: {
-                "Content-Type": "undefined",
-                "Authorization": `${token}`
+                "Content-Type": "multipart/form-data",
+                'Authorization': token
             }
-        });
-        
-        
+
+        })
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
+
 
     }
 

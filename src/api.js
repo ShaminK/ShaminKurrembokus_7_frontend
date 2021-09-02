@@ -36,22 +36,6 @@ async function connectUser(mail, password) {
     return res.json()
 }
 
-// -------------------------------------------//
-//              Posts
-// -------------------------------------------//
-// async function createPost(formData, title, description, token) {
-//     let res = await fetch('http://localhost:4200/api/posts/edit/', {
-//         method: 'POST',
-//         headers: {
-//             "Authorization": token,
-//             "Content-Type": "formData"
-//         },
-//         body: JSON.stringify({
-//             formData
-//         }
-//         )
-//     })
-// }
 
-export default { postUser, connectUser };
+export default { postUser, connectUser};
 
