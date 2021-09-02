@@ -5,7 +5,7 @@ import CreateAccount from './components/CreateAccount';
 import ListPost from './components/ListPost';
 import CreatePost from './components/CreatePost';
 import Connexion from './components/Connexion';
-import Comment from './components/Comment';
+import CreateComment from './components/CreateComment';
 import ErrorPage from './components/ErrorPage';
 import './App.css';
 
@@ -24,7 +24,7 @@ class App extends Component {
           <Route exact path="/createaccount" component={CreateAccount} />
           <Route exact path="/connect" component={Connexion} />
           <Route exact path="/post" component={CreatePost} />
-          <Route path="/comment" component={Comment} />
+          <Route path="/comment" component={CreateComment} />
           <Route component={ErrorPage} />
         </Switch>
 

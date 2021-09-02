@@ -1,25 +1,38 @@
 import React from 'react';
 import Api from '../api';
+import Comment from './Comment';
 
 class CreateComment extends React.Component {
-    
-    state = {
-        textComment : ''
+
+    constructor(props) {
+        super(props)
+        
+        const param = props.location.pathname.split('/');
+        const idPost = param[2];
+        
+        this.state = {
+            textComment: '',
+            postId: idPost
+        }
+
+        console.log(this.state.postId);
+
     }
+
 
 
     handleComment = (e) => {
         // console.log(e.target.value);
-        this.setState({ textComment : e.target.value })
+        this.setState({ textComment: e.target.value })
     }
-    
-    postComment= (e) => {
+
+    postComment = (e) => {
         e.preventDefault()
         // console.log(this.state.textComment);
         // console.log(this.props.idPost);
 
         const textComment = this.state.textComment;
-        const postId = this.props.idPost;
+        const postId = this.state.postId;
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
 
@@ -30,23 +43,30 @@ class CreateComment extends React.Component {
 
         try {
             Api.createComment(postId, userId, textComment, token)
-            .then((res)=> {
-                console.log(res);
-            })
+                .then((res) => {
+                    console.log(res);
+                })
         } catch (error) {
             console.log(error);
         }
     }
-    
-    render () {
-        return (
-            <form onSubmit={this.postComment}>
-                <textarea onChange={this.handleComment}></textarea>
-                <button>Ajouter un commentaire ...</button>
-                <p> {this.props.idPost} </p>
-            </form> 
 
-            
+    render() {
+        return (
+            <div  className="container commentContainer">
+                <h1>Commentaires</h1>
+
+                <form onSubmit={this.postComment}>
+                    <textarea onChange={this.handleComment}></textarea>
+                    <button>Ajouter un commentaire ...</button>
+                    
+                </form>
+                < Comment idPost={this.state.postId} />
+                
+            </div>
+
+
+
         )
     }
 }
