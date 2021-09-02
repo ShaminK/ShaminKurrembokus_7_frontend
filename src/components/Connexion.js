@@ -16,7 +16,7 @@ class Connexion extends React.Component {
     handleUserConnect = (e) => {
         e.preventDefault();
         try {
-            let user = Api.connectUser(this.state.mail, this.state.password)
+            Api.connectUser(this.state.mail, this.state.password)
                 .then((res) => {
                     console.log(res);
                     console.log(res.userId);

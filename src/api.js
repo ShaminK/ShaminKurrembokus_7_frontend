@@ -36,6 +36,26 @@ async function connectUser(mail, password) {
     return res.json()
 }
 
+//------- comment
 
-export default { postUser, connectUser};
+async function createComment(postId, userId, textComment, token) {
+    let res = await fetch(`http://localhost:4200/api/posts/${postId}/comment/`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+        },
+        body: JSON.stringify({
+            'userId': userId,
+            'comment': textComment
+        })
+    })
+    
+    return res.json()
+}
+
+
+
+
+export default { postUser, connectUser, createComment };
 

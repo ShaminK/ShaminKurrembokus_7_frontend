@@ -1,4 +1,5 @@
 import React from 'react';
+import Api from '../api';
 
 class CreateComment extends React.Component {
     
@@ -28,15 +29,9 @@ class CreateComment extends React.Component {
         console.log(userId);
 
         try {
-            fetch(`http://localhost:4200/api/posts/${postId}/comment/`, {
-                method: 'POST',
-                headers : {
-                    "Authorization" : token
-                },
-                body : JSON.stringify({
-                    'userId' : userId,
-                    'comment' : textComment
-                })
+            Api.createComment(postId, userId, textComment, token)
+            .then((res)=> {
+                console.log(res);
             })
         } catch (error) {
             console.log(error);

@@ -18,6 +18,7 @@ class Comment extends React.Component {
             idUser: localStorage.getItem('userId'),
             listComments: []
         }
+        
 
     }
 
@@ -50,7 +51,7 @@ class Comment extends React.Component {
 
     render() {
         console.log('%c render method', "font-size: 20px;color: orange")
-        console.log(this.state.listComments.length);
+        console.log(this.state.listComments);
         
         
         if (this.state.listComments.length === 0) {
