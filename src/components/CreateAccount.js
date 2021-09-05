@@ -71,10 +71,6 @@ class CreateAccount extends React.Component {
                         <button type="submit" className="btn btn-primary">S'inscrire</button>
                     </div>
 
-                    <h1>{this.state.mail}</h1>
-                    <p>{this.state.password}</p>
-                    <p>{this.state.lastname}</p>
-                    <p>{this.state.firstname}</p>
 
                     { this.state.redirect ? (<Redirect push to ="/connect"/>) : null }
 

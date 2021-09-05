@@ -31,13 +31,27 @@ async function connectUser(mail, password) {
             'password': password
         })
     })
-
-
     return res.json()
 }
 
-//------- comment
+async function deleteUser(userId, token) {
+    let res = await fetch('http://localhost:4200/api/auth/delete/', {
+        method : 'DELETE',
+        headers : {
+            "Content-Type": "application/json",
+            'Authorization' : token
+        },
+        body: JSON.stringify({
+            'userId' : userId
+        })
+    })
+    return res.json()
+}
 
+
+// --------------------------------------------------------------------------//
+//                                   Comment
+// --------------------------------------------------------------------------//
 async function createComment(postId, userId, textComment, token) {
     let res = await fetch(`http://localhost:4200/api/posts/${postId}/comment/`, {
         method: 'POST',
@@ -57,5 +71,5 @@ async function createComment(postId, userId, textComment, token) {
 
 
 
-export default { postUser, connectUser, createComment };
+export default { postUser, connectUser, createComment, deleteUser };
 

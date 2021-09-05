@@ -1,26 +1,73 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom';
-import Logo from '../logo.png'
+import { Link, NavLink, useHistory } from 'react-router-dom';
+import Logo from '../logo.png';
+import { Redirect } from 'react-router-dom';
 
-function Menu() {
-    return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container-fluid">
-                <Link className="navbar-brand" to="/"><img src={Logo} className='logo' alt="logo Groupomania"/></Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav ms-auto">
-                        <NavLink className="nav-link" aria-current="page" to="/createaccount">Créer compte</NavLink>
-                        <NavLink className="nav-link" aria-current="page" to="/connect">Connexion</NavLink>
-                        <NavLink className="nav-link" to="/post">Publier</NavLink>
-                        <NavLink className="nav-link" to="/">Fil d'actualité</NavLink>
+class Menu extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            connect: 'false'
+        }
+    }
+    
+
+    disconnect(e) {
+        e.preventDefault();
+        console.log('etape1');
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        console.log('etape2');
+        window.location.reload();
+        // this.setState({connect : true})
+    }
+
+
+    render() {
+        let token = localStorage.getItem('token');
+
+        if (token) {
+            // si on est connecté
+            return (
+                <nav className="navMenu container">
+                    <div className="logoDiv">
+                        <Link className="navLogo" to="/"><img src={Logo} className='logo' alt="logo Groupomania" /></Link>
+
                     </div>
-                </div>
-            </div>
-        </nav>
-    )
+
+                    <div className="linkDiv">
+                        <NavLink className="navItem" to="/post">Publier</NavLink>
+                        <NavLink className="navItem" to="/">Fil d'actualité</NavLink>
+                        <a onClick={this.disconnect} className="navItem">Déconnexion</a>
+                        <NavLink className="navItem red" to="/delete">Supprimer Compte</NavLink>
+                    </div>
+                     {/* {this.state.connect ? (<Redirect push to="/connect" />) : null} */}
+
+                </nav>
+            )
+        } else {
+            //  si on est pas connecté
+            return (
+
+                <nav className="navMenu container">
+                    <div className="logoDiv">
+                        <Link className="navLogo" to="/"><img src={Logo} className='logo' alt="logo Groupomania" /></Link>
+
+                    </div>
+
+                    <div className="linkDiv">
+                        <NavLink className="navItem" aria-current="page" to="/createaccount">Créer compte</NavLink>
+                        <NavLink className="navItem" aria-current="page" to="/connect">Connexion</NavLink>
+                    </div>
+                   
+                </nav>
+
+            )
+        }
+    }
+
 }
 
 export default Menu

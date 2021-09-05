@@ -15,7 +15,7 @@ class CreateComment extends React.Component {
             postId: idPost
         }
 
-        console.log(this.state.postId);
+        // console.log(this.state.postId);
 
     }
 
@@ -36,10 +36,10 @@ class CreateComment extends React.Component {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
 
-        console.log(textComment);
-        console.log(postId);
-        console.log(token);
-        console.log(userId);
+        // console.log(textComment);
+        // console.log(postId);
+        // console.log(token);
+        // console.log(userId);
 
         try {
             Api.createComment(postId, userId, textComment, token)
@@ -51,16 +51,19 @@ class CreateComment extends React.Component {
         }
     }
 
+
     render() {
         return (
-            <div  className="container commentContainer">
+            <div  className="container formCommentContainer">
                 <h1>Commentaires</h1>
 
-                <form onSubmit={this.postComment}>
-                    <textarea onChange={this.handleComment}></textarea>
-                    <button>Ajouter un commentaire ...</button>
-                    
+                
+                <form className="formComment" onSubmit={this.postComment}>
+                    <label><h3>Ecrire un commentaire</h3></label>
+                    <textarea className="commentArea" onChange={this.handleComment}></textarea>
+                    <button className="commentButton">Ajouter un commentaire ...</button>      
                 </form>
+
                 < Comment idPost={this.state.postId} />
                 
             </div>

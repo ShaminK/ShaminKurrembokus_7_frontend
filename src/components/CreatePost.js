@@ -94,10 +94,7 @@ class CreatePost extends React.Component {
                         <button type="submit" className="btn btn-primary" >Publier</button>
                     </div>
                 </form>
-                <p> {this.state.title} </p>
-                <p> {this.state.description} </p>
-                <p> {this.state.token} </p>
-                {/* <p> {this.state.urlPost} </p> */}
+               
             </div>
         )
     }

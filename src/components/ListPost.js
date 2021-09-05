@@ -39,11 +39,10 @@ class ListPost extends React.Component {
                             <li key={item.id} className="listPostItem">
                                 <h2>Titre: {item.title} </h2>
                                 <p>Decription : {item.description} </p>
-                                <p>L'image:  {item.urlPost}</p>
+                                
                                 <img className="postImage" src={item.urlPost} alt="" />
-                                <p>L'userId est : {item.UserId} </p>
-                                <p>Le postId est : {item.id} </p>
-                                <Link to={"/comment/"+item.id} params={{params: item.id}}>Commentaires</Link>
+                                
+                                <Link className="postLink" to={"/comment/"+item.id} params={{params: item.id}}>Commentaires</Link>
                             </li>)
                     })}
                 </ul>

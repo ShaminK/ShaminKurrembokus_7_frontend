@@ -50,9 +50,6 @@ class Comment extends React.Component {
         if (this.state.listComments.length === 0) {
             return (
                 <div className="container">
-                    
-                    <h1>Commentaires</h1>
-                   
                     <p>Aucun Commentaire</p>
                 </div>
 
@@ -60,7 +57,6 @@ class Comment extends React.Component {
         } else {
             return (
                 <div className="container commentContainer">
-                    <h1>Commentaires</h1>
                     <ul className="listComment">
                     {this.state.listComments.map((item) => {
                         return (

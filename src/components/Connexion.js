@@ -26,6 +26,7 @@ class Connexion extends React.Component {
                         this.setState({
                             redirect: true
                         })
+                        window.location.reload();
                     } 
 
                 })
@@ -55,10 +56,10 @@ class Connexion extends React.Component {
                             this.setState({ password: e.target.value });
                         }} />
                     </div>
-                    <div className="form-check col-md-6 mx-auto">
+                    {/* <div className="form-check col-md-6 mx-auto">
                         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                         <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                    </div>
+                    </div> */}
 
                     <div className="form-group d-flex justify-content-center mt-3">
                         <button type="submit" className="btn btn-primary">Connexion</button>
