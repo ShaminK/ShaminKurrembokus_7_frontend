@@ -12,48 +12,81 @@ import './App.css';
 
 
 class App extends Component {
+  state = {
+    token : localStorage.getItem('token'),
+    userId : localStorage.getItem('userId'),
+  }
+
 
   render() {
-
     let token = localStorage.getItem('token');
-
-    if (token) {
-      {/* Si on est connecté */}
-      console.log('il y a un token');
-      return (
-        <BrowserRouter>
-          <Menu />
-        
-          <Switch>
-            <Route exact path="/" component={ListPost} />
-            <Route exact path="/post" component={CreatePost} />
-            <Route path="/comment" component={CreateComment} />
-            <Route path="/delete" component={DeleteAccount} />
-            <Route component={ErrorPage} />
-          </Switch>
-        </BrowserRouter>
-      );
+    console.log('Test du token '+this.state.token);
+    return (
       
-    }else {
-      {/* si on est pas conneté */}
-      return (
-        <BrowserRouter>
-          <Menu />
-        
-          <Switch>
-          <Route exact path="/" component={Connexion} />
-            <Route exact path="/createaccount" component={CreateAccount} />
-            <Route exact path="/connect" component={Connexion} />
-            <Route component={ErrorPage} />
-          </Switch>
-  
-  
-  
-        </BrowserRouter>
-      );
-    }
+    <BrowserRouter>
+      <Menu />
 
-    
+      <Switch>
+
+        {/* Si l'utilisateur est connecté */}
+
+        <Route exact path="/" render={() => {
+          if (token) {
+            return <ListPost />
+          } else {
+            return <Connexion />
+          }
+
+        }} />
+
+        <Route exact path="/post" render={() => {
+          if (token) {
+            return <CreatePost />
+          } else {
+            return <Connexion />
+          }
+        }} />
+
+        <Route path="/comment" render={() => {
+          if (token) {
+            return <CreateComment />
+          } else {
+            return <Connexion />
+          }
+        }} />
+
+        <Route path="/delete" render={() => {
+          if (token) {
+            return <DeleteAccount />
+          } else {
+            return <Connexion />
+          }
+        }} />
+
+        {/* Si l'utilisateur n'est pas connecté */}
+
+        <Route exact path="/connect" render={() => {
+          if (!token) {
+            console.log('Routeur');
+            return <Connexion />
+          } else {
+            return <ListPost />
+          }
+        }} />
+
+        <Route exact path="/createaccount" render={() => {
+          if (!token) {
+            return <CreateAccount />
+          } else {
+            return <ListPost />
+          }
+        }} />
+
+        <Route component={ErrorPage} />
+      </Switch>
+    </BrowserRouter>
+    )
+
   }
 
 }

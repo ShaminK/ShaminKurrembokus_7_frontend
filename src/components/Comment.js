@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.css';
-import CreateComment from './CreateComment';
 
 class Comment extends React.Component {
 
@@ -61,6 +60,7 @@ class Comment extends React.Component {
                     {this.state.listComments.map((item) => {
                         return (
                                 <li key={item.id} className="listCommentItem">
+                                    <p className="commentAuthor">{item.User.firstname} {item.User.lastname}</p>
                                     <p className="commentContent"> {item.comment} </p>
                                     <p className="commentInfo"> {item.createdAt} </p>
                                 </li>   

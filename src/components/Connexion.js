@@ -26,7 +26,7 @@ class Connexion extends React.Component {
                         this.setState({
                             redirect: true
                         })
-                        window.location.reload();
+                        // window.location.reload();
                     } 
 
                 })

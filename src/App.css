@@ -179,6 +179,11 @@ li {
   background-color: honeydew;
 }
 
+.commentAuthor {
+  border-bottom: black solid 1px;
+  padding-left: 20px;
+}
+
 .commentContent {
   border-radius: 7px;
   padding: 20px;

@@ -27,8 +27,8 @@ class ListPost extends React.Component {
 
     render() {
         console.log('%c render method', "font-size: 20px;color: orange");
-        console.log(this.state);
         console.log(this.state.listPosts);
+       
 
         return (
             <div className="container postContainer">
@@ -41,6 +41,7 @@ class ListPost extends React.Component {
                                 <p>Decription : {item.description} </p>
                                 
                                 <img className="postImage" src={item.urlPost} alt="" />
+                                <p>Publié par {item.User.firstname} {item.User.lastname}</p>
                                 
                                 <Link className="postLink" to={"/comment/"+item.id} params={{params: item.id}}>Commentaires</Link>
                             </li>)

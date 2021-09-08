@@ -60,7 +60,7 @@ class CreateComment extends React.Component {
                 
                 <form className="formComment" onSubmit={this.postComment}>
                     <label><h3>Ecrire un commentaire</h3></label>
-                    <textarea className="commentArea" onChange={this.handleComment}></textarea>
+                    <textarea className="commentArea" onChange={this.handleComment} placeholder="Ajouter un commentaire"></textarea>
                     <button className="commentButton">Ajouter un commentaire ...</button>      
                 </form>
 

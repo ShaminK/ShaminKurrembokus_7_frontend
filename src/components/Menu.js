@@ -1,27 +1,25 @@
 import React from 'react'
-import { Link, NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../logo.png';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from "react-router";
+
 
 class Menu extends React.Component {
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            connect: 'false'
-        }
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
     
 
-    disconnect(e) {
+    disconnect = (e) => {
         e.preventDefault();
         console.log('etape1');
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         console.log('etape2');
-        window.location.reload();
-        // this.setState({connect : true})
+        // window.location.reload();
+        console.log(this.props);
+        this.props.history.push('/connect');
     }
 
 
@@ -40,10 +38,9 @@ class Menu extends React.Component {
                     <div className="linkDiv">
                         <NavLink className="navItem" to="/post">Publier</NavLink>
                         <NavLink className="navItem" to="/">Fil d'actualité</NavLink>
-                        <a onClick={this.disconnect} className="navItem">Déconnexion</a>
+                        <button onClick={this.disconnect} className="navItem">Déconnexion</button>
                         <NavLink className="navItem red" to="/delete">Supprimer Compte</NavLink>
                     </div>
-                     {/* {this.state.connect ? (<Redirect push to="/connect" />) : null} */}
 
                 </nav>
             )
@@ -70,4 +67,4 @@ class Menu extends React.Component {
 
 }
 
-export default Menu
+export default withRouter(Menu) 

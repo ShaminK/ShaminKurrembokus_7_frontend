@@ -77,12 +77,12 @@ class CreatePost extends React.Component {
                 <form className="col-md-8 mx-auto" encType="multipart/form-data" onSubmit={this.sendFormPost}>
                     <div className="form-group mb-3">
                         <label htmlFor="postTitle">Titre de votre publication</label>
-                        <input type="text" className="form-control" id="postTitle" name="title" value={this.state.title} onChange={this.titleOnChange} />
+                        <input type="text" className="form-control" id="postTitle" name="title" onChange={this.titleOnChange} placeholder="Ajouter un titre"/>
                     </div>
 
                     <div className="form-group mb-3">
                         <label htmlFor="postDescription">Ajouter une description</label>
-                        <textarea className="form-control" id="postDescription" rows="4" name="description" value={this.state.description} onChange={this.descriptionOnChange}></textarea>
+                        <textarea className="form-control" id="postDescription" rows="4" name="description" placeholder="Ajouter un description" onChange={this.descriptionOnChange}></textarea>
                     </div>
 
                     <div className="form-group">
