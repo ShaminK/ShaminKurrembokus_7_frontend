@@ -6,16 +6,38 @@ class CreateComment extends React.Component {
 
     constructor(props) {
         super(props)
-        
-        const param = props.location.pathname.split('/');
-        const idPost = param[2];
+        console.log(window.location.pathname);
+        const param = window.location.pathname.split('/');
+        console.log(param);
+        const idPost = param[2]
+
+        console.log(idPost);
         
         this.state = {
             textComment: '',
-            postId: idPost
+            postId: idPost,
+            listComments : []
         }
 
-        // console.log(this.state.postId);
+    }
+
+    async componentDidMount() {
+        console.log('%c component did mount method', "font-size: 20px;color: violet")
+
+        try {
+            const token = localStorage.getItem('token')
+
+            const response = await fetch(`http://localhost:4200/api/posts/${this.state.postId}/listComment/`, {
+                headers: {
+                    'authorization': token
+                }
+            })
+            let comments = await response.json()
+
+            this.setState({ listComments: comments })
+        } catch (error) {
+            console.log(error);
+        }
 
     }
 
@@ -26,29 +48,32 @@ class CreateComment extends React.Component {
         this.setState({ textComment: e.target.value })
     }
 
-    postComment = (e) => {
+    postComment = async (e) => {
         e.preventDefault()
-        // console.log(this.state.textComment);
-        // console.log(this.props.idPost);
 
         const textComment = this.state.textComment;
         const postId = this.state.postId;
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
 
-        // console.log(textComment);
-        // console.log(postId);
-        // console.log(token);
-        // console.log(userId);
-
         try {
             Api.createComment(postId, userId, textComment, token)
                 .then((res) => {
                     console.log(res);
                 })
+
+                const response = await fetch(`http://localhost:4200/api/posts/${this.state.postId}/listComment/`, {
+                    headers: {
+                        'authorization': token
+                    }
+                })
+                let comments = await response.json()
+    
+                this.setState({ listComments: comments , textComment: ''})
         } catch (error) {
             console.log(error);
         }
+
     }
 
 
@@ -64,7 +89,7 @@ class CreateComment extends React.Component {
                     <button className="commentButton">Ajouter un commentaire ...</button>      
                 </form>
 
-                < Comment idPost={this.state.postId} />
+                < Comment listComments={this.state.listComments} />
                 
             </div>
 

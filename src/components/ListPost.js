@@ -11,10 +11,9 @@ class ListPost extends React.Component {
     };
 
     async componentDidMount() {
-        console.log('%c component did mount method', "font-size: 20px;color: violet");
+        console.log('%c component did mount method du listPost', "font-size: 20px;color: violet");
         try {
             const token = localStorage.getItem('token');
-            console.log('token est :' + token);
             const response = await fetch('http://localhost:4200/api/posts/', { headers: { 'authorization': token } });
             const posts = await response.json()
             console.log(posts);

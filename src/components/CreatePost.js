@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -11,7 +12,8 @@ class CreatePost extends React.Component {
             description: 'la description du post',
             file: null,
             token: localStorage.getItem('token'),
-            userId: localStorage.getItem('userId')
+            userId: localStorage.getItem('userId'),
+            // redirect: false
         }
     }
 
@@ -66,12 +68,15 @@ class CreatePost extends React.Component {
             .then(res => console.log(res))
             .catch(err => console.error(err))
 
+            // this.setState({ redirect : true})
+            this.props.history.push('/')
 
     }
 
 
     render() {
         return (
+            
             <div className="container">
                 <h1>Publier un article</h1>
                 <form className="col-md-8 mx-auto" encType="multipart/form-data" onSubmit={this.sendFormPost}>
@@ -94,11 +99,11 @@ class CreatePost extends React.Component {
                         <button type="submit" className="btn btn-primary" >Publier</button>
                     </div>
                 </form>
-               
+                {/* {this.state.redirect ? (<Redirect push to="/" />) : null} */}
             </div>
         )
     }
 
 }
 
-export default CreatePost;
+export default withRouter(CreatePost);

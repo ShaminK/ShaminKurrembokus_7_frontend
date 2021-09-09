@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Menu from './components/Menu';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import CreateAccount from './components/CreateAccount';
 import ListPost from './components/ListPost';
 import CreatePost from './components/CreatePost';
@@ -10,17 +10,19 @@ import DeleteAccount from './components/DeleteAccount';
 import ErrorPage from './components/ErrorPage';
 import './App.css';
 
+function isLoggedIn() {
+  return localStorage.getItem('token') != null;
+}
+
+function isLoggedOut() {
+  return localStorage.getItem('token') == null;
+}
 
 class App extends Component {
-  state = {
-    token : localStorage.getItem('token'),
-    userId : localStorage.getItem('userId'),
-  }
+  
 
 
   render() {
-    let token = localStorage.getItem('token');
-    console.log('Test du token '+this.state.token);
     return (
       
     <BrowserRouter>
@@ -31,54 +33,54 @@ class App extends Component {
         {/* Si l'utilisateur est connecté */}
 
         <Route exact path="/" render={() => {
-          if (token) {
+          if (isLoggedIn()) {
             return <ListPost />
           } else {
-            return <Connexion />
+            return <Redirect to="/connect" />
           }
 
         }} />
 
         <Route exact path="/post" render={() => {
-          if (token) {
+          if (isLoggedIn()) {
             return <CreatePost />
           } else {
-            return <Connexion />
+            return <Redirect to="/connect" />
           }
         }} />
 
         <Route path="/comment" render={() => {
-          if (token) {
+          if (isLoggedIn()) {
             return <CreateComment />
           } else {
-            return <Connexion />
+            return <Redirect to="/connect" />
           }
         }} />
 
         <Route path="/delete" render={() => {
-          if (token) {
+          if (isLoggedIn()) {
             return <DeleteAccount />
           } else {
-            return <Connexion />
+            return <Redirect to="/connect" />
           }
         }} />
 
         {/* Si l'utilisateur n'est pas connecté */}
 
         <Route exact path="/connect" render={() => {
-          if (!token) {
+          if (isLoggedOut()) {
             console.log('Routeur');
             return <Connexion />
           } else {
-            return <ListPost />
+            return <Redirect to="/" />
           }
         }} />
 
         <Route exact path="/createaccount" render={() => {
-          if (!token) {
+          if (isLoggedOut()) {
             return <CreateAccount />
           } else {
-            return <ListPost />
+            return <Redirect to="/" />
           }
         }} />
 
