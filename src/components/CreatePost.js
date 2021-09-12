@@ -77,7 +77,7 @@ class CreatePost extends React.Component {
     render() {
         return (
             
-            <div className="container">
+            <main className="container">
                 <h1>Publier un article</h1>
                 <form className="col-md-8 mx-auto" encType="multipart/form-data" onSubmit={this.sendFormPost}>
                     <div className="form-group mb-3">
@@ -100,7 +100,7 @@ class CreatePost extends React.Component {
                     </div>
                 </form>
                 {/* {this.state.redirect ? (<Redirect push to="/" />) : null} */}
-            </div>
+            </main>
         )
     }
 

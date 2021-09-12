@@ -30,25 +30,25 @@ class ListPost extends React.Component {
        
 
         return (
-            <div className="container postContainer">
+            <main className="container postContainer">
                 <h1>Fil d'actualité</h1>
-                <ul className="listPost">
+                <section className="listPost">
                     {this.state.listPosts.map((item) => {
                         return (
-                            <li key={item.id} className="listPostItem">
+                            <article key={item.id} className="listPostItem">
                                 <h2>Titre: {item.title} </h2>
                                 <p>Decription : {item.description} </p>
                                 
-                                <img className="postImage" src={item.urlPost} alt="" />
+                                <img className="postImage" src={item.urlPost} alt="Publication" />
                                 <p>Publié par {item.User.firstname} {item.User.lastname}</p>
                                 
                                 <Link className="postLink" to={"/comment/"+item.id} params={{params: item.id}}>Commentaires</Link>
-                            </li>)
+                            </article>)
                     })}
-                </ul>
+                </section>
 
 
-            </div>
+            </main>
         )
     }
 }

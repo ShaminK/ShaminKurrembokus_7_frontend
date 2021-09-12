@@ -24,14 +24,14 @@ export class DeleteAccount extends Component {
 
     render() {
         return (
-            <div className="container">
+            <main className="container">
                 <h1>Supprimer son compte</h1>
                 <div className="sectionDelete">
                     <p>Voulez-vous supprimer votre compte définitivement ?</p>
                     <button className="deleteButton" onClick={this.deleteAccount}>Supprimer Compte</button>
                 </div>
 
-            </div>
+            </main>
         )
     }
 }

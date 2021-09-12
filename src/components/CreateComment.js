@@ -62,24 +62,28 @@ class CreateComment extends React.Component {
                     console.log(res);
                 })
 
+                
+
                 const response = await fetch(`http://localhost:4200/api/posts/${this.state.postId}/listComment/`, {
                     headers: {
                         'authorization': token
                     }
                 })
                 let comments = await response.json()
-    
-                this.setState({ listComments: comments , textComment: ''})
+                
+                this.setState({ listComments: comments})
         } catch (error) {
             console.log(error);
         }
+
+        this.setState({textComment: ''})
 
     }
 
 
     render() {
         return (
-            <div  className="container formCommentContainer">
+            <main  className="container formCommentContainer">
                 <h1>Commentaires</h1>
 
                 
@@ -91,7 +95,7 @@ class CreateComment extends React.Component {
 
                 < Comment listComments={this.state.listComments} />
                 
-            </div>
+            </main>
 
 
 

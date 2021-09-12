@@ -16,7 +16,7 @@ class Comment extends React.Component {
             )
         } else {
             return (
-                <div className="container commentContainer">
+                <section className="container commentContainer">
                     <ul className="listComment">
                     {this.props.listComments.map((item) => {
                         return (
@@ -28,7 +28,7 @@ class Comment extends React.Component {
                         )
                     })}
                     </ul>
-                </div>
+                </section>
             )
         }
 

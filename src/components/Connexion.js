@@ -1,6 +1,7 @@
 import React from 'react';
 import Api from '../api';
 import { Redirect } from 'react-router-dom';
+import '../App.css'
 
 class Connexion extends React.Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class Connexion extends React.Component {
         this.state = {
             mail: "mail",
             password: "password",
-            redirect: false
+            redirect: false,
+            error : ''
         }
     }
 
@@ -26,20 +28,22 @@ class Connexion extends React.Component {
                         this.setState({
                             redirect: true
                         })
-                        // window.location.reload();
-                    } 
+                    } else {
+                        console.log(res.error);
+                        this.setState({error : res.error})
+                    }
 
                 })
 
 
         } catch {
-
+            
         }
     }
 
     render() {
         return (
-            <div className="container">
+            <main className="container">
                 <h1>Connectez-vous</h1>
 
                 <form onSubmit={this.handleUserConnect} >
@@ -56,10 +60,6 @@ class Connexion extends React.Component {
                             this.setState({ password: e.target.value });
                         }} />
                     </div>
-                    {/* <div className="form-check col-md-6 mx-auto">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                    </div> */}
 
                     <div className="form-group d-flex justify-content-center mt-3">
                         <button type="submit" className="btn btn-primary">Connexion</button>
@@ -67,8 +67,8 @@ class Connexion extends React.Component {
 
                 </form>
                 {this.state.redirect ? (<Redirect push to="/" />) : null}
-
-            </div>
+                        <p className="msgError">{this.state.error}</p>
+            </main>
         )
     }
 

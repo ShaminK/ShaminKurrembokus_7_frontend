@@ -46,6 +46,13 @@ h1 {
   font-weight: 700;
 }
 
+.msgError {
+  color: red;
+  font-weight: bold;
+  font-size: larger;
+  margin-top: 50px;
+}
+
 /*    navigation */
 
 /* .active {

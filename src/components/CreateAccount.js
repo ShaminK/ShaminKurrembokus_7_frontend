@@ -12,7 +12,8 @@ class CreateAccount extends React.Component {
             password: "password",
             lastname: "nom",
             firstname: "prenom",
-            redirect: false
+            redirect: false,
+            error :''
         }
     }
 
@@ -27,6 +28,10 @@ class CreateAccount extends React.Component {
                 if (res.userId != null) {
                     this.setState({ redirect: true })
                 }
+                else {
+                    console.log(res.error);
+                    this.setState({error : res.error})
+                }
             })
             
         } catch (error) {
@@ -37,7 +42,7 @@ class CreateAccount extends React.Component {
 
     render() {
         return (
-            <div className="container" >
+            <main className="container" >
                 <h1>Inscription</h1>
                 <form onSubmit={this.handleFormUser} >
                     <div className="form-row">
@@ -75,7 +80,8 @@ class CreateAccount extends React.Component {
                     { this.state.redirect ? (<Redirect push to ="/connect"/>) : null }
 
                 </form>
-            </div>
+                <p className="msgError">{ this.state.error} </p>
+            </main>
         )
     }
 }
