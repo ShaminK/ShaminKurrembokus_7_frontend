@@ -1,6 +1,6 @@
 import React from 'react';
 import Api from '../api';
-import { Redirect } from 'react-router-dom';
+import {  withRouter } from 'react-router-dom';
 import '../App.css'
 
 class Connexion extends React.Component {
@@ -8,9 +8,8 @@ class Connexion extends React.Component {
         super(props)
 
         this.state = {
-            mail: "mail",
-            password: "password",
-            redirect: false,
+            mail: "",
+            password: "",
             error : ''
         }
     }
@@ -25,9 +24,7 @@ class Connexion extends React.Component {
                     if (res.userId != null && res.token != null) {
                         localStorage.setItem('token', JSON.stringify(res.token));
                         localStorage.setItem('userId', JSON.stringify(res.userId))
-                        this.setState({
-                            redirect: true
-                        })
+                        this.props.history.push("/")
                     } else {
                         console.log(res.error);
                         this.setState({error : res.error})
@@ -48,14 +45,14 @@ class Connexion extends React.Component {
 
                 <form onSubmit={this.handleUserConnect} >
                     <div className="form-group col-md-6 mx-auto">
-                        <label htmlFor="exampleInputEmail1">Email address</label>
+                        <label htmlFor="exampleInputEmail1">Adresse Mail</label>
                         <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={this.state.mail} onChange={(e) => {
                             this.setState({ mail: e.target.value });
                         }} />
-                        {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                        
                     </div>
                     <div className="form-group col-md-6 mx-auto">
-                        <label htmlFor="exampleInputPassword1">Password</label>
+                        <label htmlFor="exampleInputPassword1">Mot de Passe</label>
                         <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={this.state.password} onChange={(e) => {
                             this.setState({ password: e.target.value });
                         }} />
@@ -66,7 +63,6 @@ class Connexion extends React.Component {
                     </div>
 
                 </form>
-                {this.state.redirect ? (<Redirect push to="/" />) : null}
                         <p className="msgError">{this.state.error}</p>
             </main>
         )
@@ -74,4 +70,4 @@ class Connexion extends React.Component {
 
 }
 
-export default Connexion;
+export default withRouter(Connexion);

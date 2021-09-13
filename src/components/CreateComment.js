@@ -1,6 +1,5 @@
 import React from 'react';
 import Api from '../api';
-import Comment from './Comment';
 
 class CreateComment extends React.Component {
 
@@ -12,35 +11,16 @@ class CreateComment extends React.Component {
         const idPost = param[2]
 
         console.log(idPost);
+        console.log(this.props);
         
         this.state = {
             textComment: '',
-            postId: idPost,
-            listComments : []
+            postId: idPost
         }
 
     }
 
-    async componentDidMount() {
-        console.log('%c component did mount method', "font-size: 20px;color: violet")
-
-        try {
-            const token = localStorage.getItem('token')
-
-            const response = await fetch(`http://localhost:4200/api/posts/${this.state.postId}/listComment/`, {
-                headers: {
-                    'authorization': token
-                }
-            })
-            let comments = await response.json()
-
-            this.setState({ listComments: comments })
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
-
+    
 
 
     handleComment = (e) => {
@@ -56,22 +36,18 @@ class CreateComment extends React.Component {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
 
+        console.log('on est la ');
+        console.log(this.props);
+
         try {
             Api.createComment(postId, userId, textComment, token)
-                .then((res) => {
-                    console.log(res);
+                .then((comment) => {
+                    console.log(comment);
+                    console.log(this.props);
+                    this.props.onCreateComment(comment)
                 })
 
                 
-
-                const response = await fetch(`http://localhost:4200/api/posts/${this.state.postId}/listComment/`, {
-                    headers: {
-                        'authorization': token
-                    }
-                })
-                let comments = await response.json()
-                
-                this.setState({ listComments: comments})
         } catch (error) {
             console.log(error);
         }
@@ -92,8 +68,6 @@ class CreateComment extends React.Component {
                     <textarea className="commentArea" onChange={this.handleComment} placeholder="Ajouter un commentaire"></textarea>
                     <button className="commentButton">Ajouter un commentaire ...</button>      
                 </form>
-
-                < Comment listComments={this.state.listComments} />
                 
             </main>
 

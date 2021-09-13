@@ -5,7 +5,7 @@ import CreateAccount from './components/CreateAccount';
 import ListPost from './components/ListPost';
 import CreatePost from './components/CreatePost';
 import Connexion from './components/Connexion';
-import CreateComment from './components/CreateComment';
+import Comment from './components/Comment';
 import DeleteAccount from './components/DeleteAccount';
 import ErrorPage from './components/ErrorPage';
 import './App.css';
@@ -34,7 +34,7 @@ class App extends Component {
 
         <Route exact path="/" render={() => {
           if (isLoggedIn()) {
-            return <ListPost />
+            return <ListPost key={Math.random()} />
           } else {
             return <Redirect to="/connect" />
           }
@@ -51,7 +51,7 @@ class App extends Component {
 
         <Route path="/comment" render={() => {
           if (isLoggedIn()) {
-            return <CreateComment />
+            return <Comment />
           } else {
             return <Redirect to="/connect" />
           }

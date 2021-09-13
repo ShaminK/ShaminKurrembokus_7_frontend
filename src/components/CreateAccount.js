@@ -8,10 +8,10 @@ class CreateAccount extends React.Component {
         super(props)
 
         this.state = {
-            mail: "mail",
-            password: "password",
-            lastname: "nom",
-            firstname: "prenom",
+            mail: "",
+            password: "",
+            lastname: "",
+            firstname: "",
             redirect: false,
             error :''
         }
