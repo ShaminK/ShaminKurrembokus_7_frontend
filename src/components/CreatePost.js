@@ -65,11 +65,14 @@ class CreatePost extends React.Component {
             }
 
         })
-            .then(res => console.log(res))
+            .then((res) => {
+                console.log(res)
+                this.props.history.push('/')
+            })
             .catch(err => console.error(err))
 
             // this.setState({ redirect : true})
-            this.props.history.push('/')
+            
 
     }
 

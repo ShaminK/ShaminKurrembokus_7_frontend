@@ -1,5 +1,6 @@
 import React from 'react';
 import Api from '../api';
+import { withRouter } from 'react-router-dom';
 
 class CreateComment extends React.Component {
 
@@ -36,15 +37,15 @@ class CreateComment extends React.Component {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
 
-        console.log('on est la ');
-        console.log(this.props);
-
         try {
             Api.createComment(postId, userId, textComment, token)
                 .then((comment) => {
+                    console.log('1er');
                     console.log(comment);
+                    console.log('2eme');
                     console.log(this.props);
                     this.props.onCreateComment(comment)
+                    this.props.history.push('/comment/'+postId)
                 })
 
                 
@@ -77,4 +78,4 @@ class CreateComment extends React.Component {
     }
 }
 
-export default CreateComment;
+export default withRouter(CreateComment);

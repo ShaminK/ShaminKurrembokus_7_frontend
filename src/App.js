@@ -51,7 +51,7 @@ class App extends Component {
 
         <Route path="/comment" render={() => {
           if (isLoggedIn()) {
-            return <Comment />
+            return <Comment  key={Math.random()} />
           } else {
             return <Redirect to="/connect" />
           }
